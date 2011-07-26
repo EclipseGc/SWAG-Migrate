@@ -1,0 +1,9 @@
+name = "Migrate SWAG"
+description = "SWAG Migration"
+package = "Migrate"
+core = 7.x
+dependencies[] = migrate
+
+files[] = users.inc
+files[] = terms.inc
+files[] = nodes.inc

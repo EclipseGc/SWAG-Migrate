@@ -1,0 +1,7 @@
+<?php
+
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'migrate_swag') . '/terms.install.inc';
+
+function migrate_swag_install() {
+  migrate_swag_terms_install();
+}

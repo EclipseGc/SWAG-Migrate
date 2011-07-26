@@ -1,0 +1,51 @@
+<?php
+
+/*
+ * Implementation of hook_migrate_api().
+ */
+function migrate_swag_migrate_api() {
+  return array(
+    'api' => 2,
+  );
+}
+
+function migrate_swag_menu() {
+  $items = array();
+  $items['db_test'] = array(
+    'page callback' => 'migrate_swag_page_test',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function migrate_swag_page_test() {
+  $query = Database::getConnection('swagonline')
+    ->select('files', 'f')
+    ->fields('f', array('fid', 'filepath'))
+    ->condition('f.filename', '_original')
+    ->condition('f.nid', 193);
+  $results = $query->execute();
+  foreach ($results as $result) {
+    drupal_set_message('<pre>' . var_export($result, TRUE) . '</pre>');
+  }
+  return '';
+}
+
+/**
+ * Retrieve the set of terms associated with a node from the migration database.
+ */
+function migrate_swag_retrieve_tags($nid) {
+  $terms_query = Database::getConnection('swagonline')
+    ->select('term_node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('n.nid', $nid);
+  $terms_query->join('term_data', 'td', 'n.tid = td.tid');
+  $terms_query->addField('td', 'name');
+  $results = $terms_query->execute();
+  $terms = array();
+  foreach ($results as $result) {
+    $terms[] = $result->name;
+  }
+  return implode(',', $terms);
+}
