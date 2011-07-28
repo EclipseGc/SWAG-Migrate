@@ -203,6 +203,7 @@ class SwagNodesForumPostsMigration extends SwagNodesMigration {
   }
 
   public function prepareRow($current_row) {
+    parent::prepareRow($current_row);
     $current_row->terms = migrate_swag_retrieve_tags($current_row->nid);
   }
 }

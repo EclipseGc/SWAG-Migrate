@@ -7,3 +7,5 @@ dependencies[] = migrate
 files[] = users.inc
 files[] = terms.inc
 files[] = nodes.inc
+files[] = comments.inc
+

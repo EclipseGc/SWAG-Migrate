@@ -48,7 +48,7 @@ class SwagTermMigration extends Migration {
 
 class SwagForumsMigration extends SwagTermMigration {
   public function __construct() {
-    $arguments = array('vid' => '4', 'vocabulary_name' => 'forum', 'description' => t('Migrate Forum Terms'));
+    $arguments = array('vid' => '4', 'vocabulary_name' => 'forums', 'description' => t('Migrate Forum Terms'));
     parent::__construct($arguments);
   }
 }
